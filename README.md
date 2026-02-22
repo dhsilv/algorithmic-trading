@@ -1,0 +1,2 @@
+This repo records algorithmic trading strategies centered around futures spreads as part of independent research at UIUC by Danny Silverstein. 
+Data pipelining, visualization, storage, etc., is not pushed.
