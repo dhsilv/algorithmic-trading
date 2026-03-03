@@ -10,7 +10,6 @@ public:
     Strategy0VolState();
     void OnQuote(const RCM::StrategyStudio::QuoteEventMsg& msg);
     
-    // External accessors for Strategy 1
     double GetVolLevel() const { return vol_state_; }
     double GetVolShock() const { return vol_state_ - prev_vol_state_; }
     double GetExposureMultiplier() const { return exposure_multiplier_; }

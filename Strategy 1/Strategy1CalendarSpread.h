@@ -1,4 +1,17 @@
 #pragma once
+
+#ifndef _STRATEGY_STUDIO_CALENDAR_SPREAD_STRATEGY_H_
+#define _STRATEGY_STUDIO_CALENDAR_SPREAD_STRATEGY_H_
+
+#ifdef _WIN32
+    #define _STRATEGY_EXPORTS __declspec(dllexport)
+#else
+    #ifndef _STRATEGY_EXPORTS
+        #define _STRATEGY_EXPORTS
+    #endif
+#endif
+
+
 #include <deque>
 #include <cmath>
 #include <algorithm>
@@ -68,3 +81,33 @@ private:
     int spread_position_;
     Strategy0VolState vol_state_;
 };
+
+extern "C" {
+
+    _STRATEGY_EXPORTS const char* GetType() {
+        return "VenueArb";
+    }
+
+    _STRATEGY_EXPORTS IStrategy* CreateStrategy(const char* strategyType,
+                                                unsigned strategyID,
+                                                const char* strategyName,
+                                                const char* groupName) {
+        if (strcmp(strategyType, GetType()) == 0)
+            return *(new VenueArb(strategyID, strategyName, groupName));
+        return nullptr;
+    }
+
+    _STRATEGY_EXPORTS const char* GetAuthor() {
+        return "Danny Silverstein";
+    }
+
+    _STRATEGY_EXPORTS const char* GetAuthorGroup() {
+        return "UIUC";
+    }
+
+    _STRATEGY_EXPORTS const char* GetReleaseVersion() {
+        return Strategy::release_version();
+    }
+}
+
+#endif
